@@ -18,9 +18,9 @@ class Listing
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="integer")
      */
-    private $creation_year;
+    private $creationYear;
 
     /**
      * @ORM\Column(type="integer")
@@ -45,7 +45,7 @@ class Listing
     /**
      * @ORM\Column(type="datetime")
      */
-    private $publish_at;
+    private $publishAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Model::class)
@@ -64,14 +64,14 @@ class Listing
         return $this->id;
     }
 
-    public function getCreationYear(): ?\DateTimeInterface
+    public function getCreationYear(): int
     {
-        return $this->creation_year;
+        return $this->creationYear;
     }
 
-    public function setCreationYear(\DateTimeInterface $creation_year): self
+    public function setCreationYear(int $creationYear): self
     {
-        $this->creation_year = $creation_year;
+        $this->creationYear = $creationYear;
 
         return $this;
     }
