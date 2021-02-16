@@ -135,6 +135,9 @@
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
+    "pelmered/fake-car": {
+        "version": "1.6"
+    },
     "php": {
         "version": "7.4"
     },

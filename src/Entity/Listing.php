@@ -126,12 +126,12 @@ class Listing
 
     public function getPublishAt(): ?\DateTimeInterface
     {
-        return $this->publish_at;
+        return $this->publishAt;
     }
 
-    public function setPublishAt(\DateTimeInterface $publish_at): self
+    public function setPublishAt(\DateTimeInterface $publishAt): self
     {
-        $this->publish_at = $publish_at;
+        $this->publishAt = $publishAt;
 
         return $this;
     }

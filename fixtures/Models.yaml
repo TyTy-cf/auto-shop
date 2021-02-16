@@ -1,0 +1,48 @@
+
+App\Entity\Brand:
+    brand_1:
+        name: 'Opel'
+    brand_2:
+        name: 'Audi'
+    brand_3:
+        name: 'Ford'
+    brand_4:
+        name: 'Renault'
+    brand_6:
+        name: 'Toyota'
+    brand_7:
+        name: 'Volkswagen'
+    brand_8:
+        name: 'Ferrari'
+    brand_9:
+        name: 'Nissan'
+    brand_10:
+        name: 'Mercedes'
+
+
+App\Entity\Category:
+    category_1:
+        name: 'Citadine'
+    category_2:
+        name: 'Monospace'
+    category_3:
+        name: 'SUV'
+    category_4:
+        name: 'Coupée'
+    category_5:
+        name: 'Break'
+    category_6:
+        name: 'Berline'
+    category_7:
+        name: 'Monospace'
+    category_8:
+        name: 'Compacte'
+    category_9:
+        name: 'Hybride'
+
+
+App\Entity\Model:
+    model_{0..79}:
+        name: <sentence(1)>
+        brand: '@brand*'
+        category: '@category*'
