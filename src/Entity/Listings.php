@@ -47,6 +47,18 @@ class Listings
      */
     private $publishAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Models::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Models;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Sellers::class, inversedBy="Listings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sellers;
+
 
 
     public function getId(): ?int
@@ -122,6 +134,30 @@ class Listings
     public function setPublishAt(\DateTimeInterface $publishAt): self
     {
         $this->publishAt = $publishAt;
+
+        return $this;
+    }
+
+    public function getModels(): ?Models
+    {
+        return $this->Models;
+    }
+
+    public function setModels(?Models $Models): self
+    {
+        $this->Models = $Models;
+
+        return $this;
+    }
+
+    public function getSellers(): ?Sellers
+    {
+        return $this->sellers;
+    }
+
+    public function setSellers(?Sellers $sellers): self
+    {
+        $this->sellers = $sellers;
 
         return $this;
     }

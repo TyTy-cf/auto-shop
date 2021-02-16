@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SellersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Sellers
      * @ORM\Column(type="string", length=255)
      */
     private $location;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Listings::class, mappedBy="sellers", orphanRemoval=true)
+     */
+    private $Listings;
+
+    public function __construct()
+    {
+        $this->Listings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,36 @@ class Sellers
     public function setLocation(string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Listings[]
+     */
+    public function getListings(): Collection
+    {
+        return $this->Listings;
+    }
+
+    public function addListing(Listings $listing): self
+    {
+        if (!$this->Listings->contains($listing)) {
+            $this->Listings[] = $listing;
+            $listing->setSellers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListing(Listings $listing): self
+    {
+        if ($this->Listings->removeElement($listing)) {
+            // set the owning side to null (unless already changed)
+            if ($listing->getSellers() === $this) {
+                $listing->setSellers(null);
+            }
+        }
 
         return $this;
     }
