@@ -37,7 +37,11 @@ class ModelService
         $this->brandRepository = $brandRepository;
     }
 
-    private function getModels() {
+    /**
+     * @return array
+     */
+    private function getModels(): array
+    {
         $arrayModel['Opel'] = [
             'Astra' => 'Citadine',
             'Corsa' => 'Citadine',
@@ -49,6 +53,14 @@ class ModelService
             'Zafira' => 'Monospace',
         ];
         return $arrayModel;
+    }
+
+    /**
+     * @return int
+     */
+    public function getModelsSize(): int
+    {
+        return sizeof($this->getModels());
     }
 
     /**
