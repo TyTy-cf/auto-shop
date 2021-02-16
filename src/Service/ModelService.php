@@ -4,8 +4,10 @@
 namespace App\Service;
 
 
+use App\Entity\Model;
 use App\Repository\BrandRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class ModelService.php
@@ -25,16 +27,24 @@ class ModelService
     private BrandRepository $brandRepository;
 
     /**
+     * @var EntityManagerInterface $em
+     */
+    private EntityManagerInterface $em;
+
+    /**
      * ModelService constructor.
      * @param CategoryRepository $categRepository
      * @param BrandRepository $brandRepository
+     * @param EntityManagerInterface $em
      */
     public function __construct(
         CategoryRepository $categRepository,
-        BrandRepository $brandRepository
+        BrandRepository $brandRepository,
+        EntityManagerInterface $em
     ) {
         $this->categRepository = $categRepository;
         $this->brandRepository = $brandRepository;
+        $this->em = $em;
     }
 
     /**
@@ -69,8 +79,8 @@ class ModelService
             'Bolide Ecarlate' => 'Pick up',
             'Compact PussyCat' => 'Citadine',
             'Tocard Tank' => 'Break',
-            'Turbo Terrific' => 'Berlines',
-            'Tacot Tout-Terrain' => 'Berlines'
+            'Turbo Terrific' => 'Berline',
+            'Tacot Tout-Terrain' => 'Berline'
         ];
         $arrayModel['Renault'] = [
             'Clio' => 'Citadine',
@@ -140,12 +150,12 @@ class ModelService
             'Leaf' => 'Compacte'
         ];
         $arrayModel['Mercedes'] = [
-            'Classe A' => 'Berlines',
-            'Classe C' => 'Berlines',
-            'Classe E' => 'Berlines',
-            'Classe S' => 'Berlines',
-            'Classe S Limousine' => 'Berlines',
-            'Mercedes-Maybach Classe S' => 'Berlines',
+            'Classe A' => 'Berline',
+            'Classe C' => 'Berline',
+            'Classe E' => 'Berline',
+            'Classe S' => 'Berline',
+            'Classe S Limousine' => 'Berline',
+            'Mercedes-Maybach Classe S' => 'Berline',
             'EQA' => 'SUV',
             'Classe B' => 'Monospace',
             'Classe V' => 'Monospace',
@@ -165,9 +175,27 @@ class ModelService
      * Appeler depuis la commande
      */
     public function createModels() {
-        $arrayModels = $this->getModels();
-        // itérer sur key/value => où la première key est la brand de la voiture (à récupérer via le repo)
-        // itérer sur le deuxième tableau associatif (qui est la value du premier foreach)
-        // où cette fois => la key est le nom du model et la value est la categorie de la voiture (à récupérer via le repo categ)
+        // On itère sur notre tableau de K,V
+        // Où la K = nom de la marque
+        // Où la V = tableau de K,V entre nom du modèle et de la catégorie
+        foreach ($this->getModels() as $brandName=> $arrayInfosModels) {
+            // On itère sur notre tableau de K,V
+            // Où la K = nom du modèle
+            // Où la V = nom de la catégorie
+            foreach ($arrayInfosModels as $modelName => $categoryName) {
+                // On peut donc récupérer en BDD nos catégories et nos marques respestives en fonction
+                // des données de notre tableau
+                $category = $this->categRepository->findOneBy(['name' => $categoryName]);
+                $brand = $this->brandRepository->findOneBy(['name' => $brandName]);
+                // Afin de pouvoir créer nos Model
+                $model = (new Model())
+                    ->setName($modelName)
+                    ->setBrand($brand)
+                    ->setCategory($category)
+                ;
+                $this->em->persist($model);
+            }
+        }
+        $this->em->flush();
     }
 }

@@ -50,7 +50,7 @@ class BrandCommand extends Command
     {
         $this
             ->setName('app:brand')
-            ->setDescription('Load the categories of the project');
+            ->setDescription('Load the brands of the project');
     }
 
     /**
@@ -60,7 +60,7 @@ class BrandCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Creating all brands...');
+        $output->writeln('<info>Creating all brands...');
         // Output : où afficher la progressbar
         // duexième argument : sa taille max !
         // On créé la progress bar en se basant sur la taille de notre tableau de brands
@@ -81,7 +81,8 @@ class BrandCommand extends Command
         // On peut sauvegarder nos objets en base de données
         $this->em->flush();
         // Informer l'utilisateur que tout s'est bien passé
-        $output->writeln('Brands created with success !');
+        $output->writeln('');
+        $output->writeln('<info>Brands created with success !');
         return command::SUCCESS;
     }
 }

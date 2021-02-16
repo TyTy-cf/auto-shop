@@ -32,7 +32,7 @@ class CategoriesCommand extends Command
         'Pick up',
         'Break',
         'Monospace',
-        'Berlines',
+        'Berline',
         'tank',
         'Mini',
         'Coupée',
@@ -83,7 +83,7 @@ class CategoriesCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Creating all categories...');
+        $output->writeln('<info>Creating all categories...');
         // Output : où afficher la progressbar
         // duexième argument : sa taille max !
         // On créé la progress bar en se basant sur la taille de notre tableau de categories
@@ -104,7 +104,8 @@ class CategoriesCommand extends Command
         // On peut sauvegarder nos objets en base de données
         $this->em->flush();
         // Informer l'utilisateur que tout s'est bien passé
-        $output->writeln('Categories created with success !');
+        $output->writeln('');
+        $output->writeln('<info>Categories created with success !');
         return command::SUCCESS;
     }
 
