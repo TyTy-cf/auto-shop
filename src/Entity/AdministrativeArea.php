@@ -23,12 +23,12 @@ class AdministrativeArea
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=30)
      */
     private $code;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $parentCode;
 
@@ -59,24 +59,24 @@ class AdministrativeArea
         return $this;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): self
+    public function setCode(string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getParentCode(): ?int
+    public function getParentCode(): ?string
     {
         return $this->parentCode;
     }
 
-    public function setParentCode(int $parentCode): self
+    public function setParentCode(string $parentCode): self
     {
         $this->parentCode = $parentCode;
 

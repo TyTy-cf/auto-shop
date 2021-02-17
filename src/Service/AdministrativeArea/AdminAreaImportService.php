@@ -27,7 +27,7 @@ class AdminAreaImportService
         $this->em = $em;
     }
 
-    public function importRegion()
+    public function importRegions()
     {
         $response = $this->client->request(
             'GET',
@@ -54,6 +54,11 @@ class AdminAreaImportService
                 $this->em->flush();
             }
         }
+    }
+
+    public function importDepartments()
+    {
+
     }
 
     public function createIfNotExist(AdministrativeArea $administrativeArea)
