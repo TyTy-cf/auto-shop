@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Service\AdministrativeArea\AdminAreaImportService;
 use App\Service\ModelService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +19,10 @@ class TestController extends AbstractController
 
     /**
      * @Route("/tester", name="test_controller")
-     * @param ModelService $modelService
+     * @param AdminAreaImportService $adminAreaImportService
      */
-    public function testController(ModelService $modelService) {
-        $modelService->createModels();
+    public function testController(AdminAreaImportService $adminAreaImportService) {
+        $adminAreaImportService->importRegion();
     }
 
 }
