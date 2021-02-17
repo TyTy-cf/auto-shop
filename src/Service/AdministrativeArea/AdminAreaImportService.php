@@ -15,6 +15,7 @@ class AdminAreaImportService
     private HttpClientInterface $client;
     private EntityManagerInterface $em;
 
+
     /**
      * AdminAreaImportService constructor.
      * @param HttpClientInterface $client
@@ -25,7 +26,6 @@ class AdminAreaImportService
         $this->client = $client;
         $this->em = $em;
     }
-
 
     public function importRegion()
     {
@@ -48,12 +48,25 @@ class AdminAreaImportService
                     $entity->setName($region['nom']);
                     $entity->setCode($region['code']);
                     $entity->setType(AdminAreaTypeEnum::REGIONS);
-
-                    $this->em->persist($entity);
+                    $this->createIfNotExist($entity);
                 }
 
                 $this->em->flush();
             }
+        }
+    }
+
+    public function createIfNotExist(AdministrativeArea $administrativeArea)
+    {
+        $repo = $this->em->getRepository(AdministrativeArea::class);
+
+        $match = $repo->findBy([
+            'code' => $administrativeArea->getCode(),
+            'type' => $administrativeArea->getType(),
+        ]);
+
+        if(count($match) === 0) {
+            $this->em->persist($administrativeArea);
         }
     }
 }
