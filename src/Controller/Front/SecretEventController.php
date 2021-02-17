@@ -13,6 +13,12 @@ class SecretEventController extends AbstractController
      */
     public function index(): Response
     {
+//        if(null === $this->getUser()) {
+//            return $this->redirectToRoute('app_login');
+//        }
+
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('Front/secret_event/index.html.twig', [
             'controller_name' => 'SecretEventController',
         ]);
