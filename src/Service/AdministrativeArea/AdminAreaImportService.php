@@ -58,7 +58,27 @@ class AdminAreaImportService
 
     public function importDepartments()
     {
+        $response = $this->client->request(
+            'GET',
+            'https://geo.api.gouv.fr/departements',
+        );
 
+        if($response->getStatusCode() === 200) {
+            $results = $response->toArray();
+
+            if(count($results) > 0) {
+                foreach ($results as $department) {
+                    $entity = new AdministrativeArea();
+                    $entity->setName($department['nom']);
+                    $entity->setCode($department['code']);
+                    $entity->setParentCode($department['codeRegion']);
+                    $entity->setType(AdminAreaTypeEnum::DEPARTMENT);
+                    $this->createIfNotExist($entity);
+                }
+
+                $this->em->flush();
+            }
+        }
     }
 
     public function createIfNotExist(AdministrativeArea $administrativeArea)

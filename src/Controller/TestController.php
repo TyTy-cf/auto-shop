@@ -22,7 +22,8 @@ class TestController extends AbstractController
      * @param AdminAreaImportService $adminAreaImportService
      */
     public function testController(AdminAreaImportService $adminAreaImportService) {
-        $adminAreaImportService->importRegions();
+//        $adminAreaImportService->importRegions();
+        $adminAreaImportService->importDepartments();
     }
 
 }
