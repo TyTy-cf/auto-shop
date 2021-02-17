@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New AdministrativeArea{% endblock %}
+
+{% block body %}
+    <h1>Create new AdministrativeArea</h1>
+
+    {{ include('Back/crud/administrative_area/_form.html.twig') }}
+
+    <a href="{{ path('administrative_area_index') }}">back to list</a>
+{% endblock %}

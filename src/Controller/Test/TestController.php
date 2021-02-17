@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\Test;
 
 
 use App\Service\AdministrativeArea\AdminAreaImportService;

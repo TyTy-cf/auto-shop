@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AdministrativeArea{% endblock %}
+
+{% block body %}
+    <h1>Edit AdministrativeArea</h1>
+
+    {{ include('Back/crud/administrative_area/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('administrative_area_index') }}">back to list</a>
+
+    {{ include('Back/crud/administrative_area/_delete_form.html.twig') }}
+{% endblock %}
