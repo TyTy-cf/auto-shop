@@ -1,0 +1,18 @@
+App\Entity\Seller:
+  seller_{0..499}:
+    lastName: <lastName()>
+    firstName: <firstname()>
+    email: <email()>
+    phoneNumber: <phoneNumber()>
+    location: <streetAddress()>
+
+#App\Entity\Listing:
+    #  listing_{0..999}:
+    #creationYear: <numberBetween(1999, 2020)>
+    #km: <numberBetween(1000, 200000)>
+    #price: <numberBetween(2500, 112000)>
+    #description: <sentence(20)>
+    #title: <sentence(3)>
+    #publishAt: <dateTimeBetween('2020-08-01', '2021-02-16')>
+    #seller: '@seller*'
+    #model: '@model*'

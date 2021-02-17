@@ -4,8 +4,11 @@
 namespace App\Service;
 
 
+use App\Entity\Model;
 use App\Repository\BrandRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class ModelService.php
@@ -24,17 +27,22 @@ class ModelService
      */
     private BrandRepository $brandRepository;
 
+    private EntityManagerInterface $em;
+
     /**
      * ModelService constructor.
      * @param CategoryRepository $categRepository
      * @param BrandRepository $brandRepository
+     * @param EntityManagerInterface $em
      */
     public function __construct(
         CategoryRepository $categRepository,
-        BrandRepository $brandRepository
+        BrandRepository $brandRepository,
+        EntityManagerInterface $em
     ) {
         $this->categRepository = $categRepository;
         $this->brandRepository = $brandRepository;
+        $this->em = $em;
     }
 
     /**
@@ -50,10 +58,10 @@ class ModelService
             'Optimus Prime' => '4x4',
         ];
         $arrayModel['Audi'] = [
-            'A5' => 'Berline',
+            'A5' => 'Berlines',
             'Batmobile' => 'Tank',
             'Bumbo' => 'Mini',
-            'A3' => 'Berline',
+            'A3' => 'Berlines',
             'R8' => 'Coupée',
         ];
         $arrayModel['Ford'] = [
@@ -162,6 +170,7 @@ class ModelService
         return $arrayModel;
     }
 
+
     /**
      * @return int
      */
@@ -176,7 +185,22 @@ class ModelService
     public function createModels() {
         $arrayModels = $this->getModels();
         // itérer sur key/value => où la première key est la brand de la voiture (à récupérer via le repo)
-        // itérer sur le deuxième tableau associatif (qui est la value du premier foreach)
-        // où cette fois => la key est le nom du model et la value est la categorie de la voiture (à récupérer via le repo categ)
+        foreach ($this->getModels() as $brandName => $arrayInfoModel){
+            // itérer sur le deuxième tableau associatif (qui est la value du premier foreach)
+            // où cette fois => la key est le nom du model et la value est la categorie de la voiture (à récupérer via
+            // le repo categ)
+            foreach ($arrayInfoModel as $modelName => $categoryName){
+                $category = $this->categRepository->findOneBy(['name' => $categoryName]);
+                $brand = $this->brandRepository->findOneBy(['name' => $brandName]);
+                $modelToSet = new Model();
+                $modelToSet
+                    ->setName($modelName)
+                    ->setCategory($category)
+                    ->setBrand($brand);
+
+                $this->em->persist($modelToSet);
+            }
+        }
+        $this->em->flush();
     }
 }

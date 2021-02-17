@@ -71,7 +71,7 @@ class CreateCategorieCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('app:categories')
+            ->setName('app:categorie')
             ->setDescription('Load the categories of the project')
         ;
     }

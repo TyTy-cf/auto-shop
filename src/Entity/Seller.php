@@ -20,12 +20,12 @@ class Seller
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=127)
@@ -33,9 +33,9 @@ class Seller
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=120)
      */
-    private $phone_number;
+    private $phoneNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -47,63 +47,83 @@ class Seller
         return $this->id;
     }
 
-    public function getLastName(): ?string
+    /**
+     * @return mixed
+     */
+    public function getLastName()
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName): void
     {
-        $this->last_name = $last_name;
-
-        return $this;
+        $this->lastName = $lastName;
     }
 
-    public function getFirstName(): ?string
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): self
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName): void
     {
-        $this->first_name = $first_name;
-
-        return $this;
+        $this->firstName = $firstName;
     }
 
-    public function getEmail(): ?string
+    /**
+     * @return mixed
+     */
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
-    public function getPhoneNumber(): ?string
+    /**
+     * @return mixed
+     */
+    public function getPhoneNumber()
     {
-        return $this->phone_number;
+        return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(string $phone_number): self
+    /**
+     * @param mixed $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber): void
     {
-        $this->phone_number = $phone_number;
-
-        return $this;
+        $this->phoneNumber = $phoneNumber;
     }
 
-    public function getLocation(): ?string
+    /**
+     * @return mixed
+     */
+    public function getLocation()
     {
         return $this->location;
     }
 
-    public function setLocation(string $location): self
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location): void
     {
         $this->location = $location;
-
-        return $this;
     }
 }

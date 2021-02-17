@@ -31,7 +31,7 @@ class CreateBrandCommand extends Command
         'Nissan',
         'Ford',
         'Ferrari',
-        'Volswagen',
+        'Volkswagen',
         'Audi',
         'WackyRaces',
         'CTR',
