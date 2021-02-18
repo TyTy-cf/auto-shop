@@ -1,0 +1,9 @@
+fos_ck_editor:
+    configs:
+
+        my_config:
+            toolbar: full
+    toolbars:
+        configs:
+            my_toolbar_1: [['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ], [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ], [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',  'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', ] ]
+
