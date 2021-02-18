@@ -3,5 +3,9 @@
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
 
+//base
+@import "base/general";
 
+//components
+@import "component/card/default-card";
 
