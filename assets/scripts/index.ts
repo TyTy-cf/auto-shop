@@ -1,2 +1,2 @@
-console.log('coucou ça fonctionne');
+import 'bootstrap';
 
