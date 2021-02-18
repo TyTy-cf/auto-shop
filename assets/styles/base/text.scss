@@ -1,0 +1,39 @@
+@font-face {
+    font-family: $title-font;
+    src: url('#{$font-path}/Poppins/Poppins-Regular.woff2') format('woff2'),
+    url('#{$font-path}/Poppins/Poppins-Regular.woff') format('woff'),
+    url('#{$font-path}/Poppins/Poppins-Regular.ttf') format('ttf'),
+    url('#{$font-path}/Poppins/Poppins-Regular.eot') format('eot'),
+    url('#{$font-path}/Poppins/Poppins-Regular.otf') format('otf');
+}
+
+@font-face {
+    font-family: $title-font;
+    font-style: italic;
+    src: url('#{$font-path}/Poppins/Poppins-Italic.woff2') format('woff2'),
+    url('#{$font-path}/Poppins/Poppins-Italic.woff') format('woff'),
+    url('#{$font-path}/Poppins/Poppins-Italic.ttf') format('ttf'),
+    url('#{$font-path}/Poppins/Poppins-Italic.eot') format('eot'),
+    url('#{$font-path}/Poppins/Poppins-Italic.otf') format('otf');
+}
+
+@font-face {
+    font-family: $title-font;
+    font-weight: bold;
+    src: url('#{$font-path}/Poppins/Poppins-Bold.woff2') format('woff2'),
+    url('#{$font-path}/Poppins/Poppins-Bold.woff') format('woff'),
+    url('#{$font-path}/Poppins/Poppins-Bold.ttf') format('ttf'),
+    url('#{$font-path}/Poppins/Poppins-Bold.eot') format('eot'),
+    url('#{$font-path}/Poppins/Poppins-Bold.otf') format('otf');
+}
+
+.section-title {
+    font-family: sans-serif;
+    font-weight: bold;
+    color: $main-color;
+}
+
+.pop-title {
+    font-family: $title-font;
+    font-style: italic;
+}

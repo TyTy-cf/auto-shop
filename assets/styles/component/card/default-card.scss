@@ -59,15 +59,15 @@
         font-size: 1.5rem;
     }
 
-    .content {
-
-    }
-
     .read-more {
         position: absolute;
         bottom: 1rem;
         left: 0;
         width: 100%;
         text-align: center;
+
+        a {
+            color: $main-color;
+        }
     }
 }

@@ -6,11 +6,18 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-
+                <h1 class="pop-title">
+                    Coucou
+                </h1>
             </div>
         </div>
         
         <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">
+                    Notre actualité
+                </h2>
+            </div>
             {% for post in 0..2 %}
                 <div class="col-lg-4 mb-5">
                     {% include 'Front/Partials/card/default-card.html.twig' with {'index': loop.index} %}
