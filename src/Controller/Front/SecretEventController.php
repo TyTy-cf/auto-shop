@@ -2,6 +2,7 @@
 
 namespace App\Controller\Front;
 
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,7 +12,7 @@ class SecretEventController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(PostRepository $postRepository): Response
     {
 //        if(null === $this->getUser()) {
 //            return $this->redirectToRoute('app_login');
@@ -19,8 +20,14 @@ class SecretEventController extends AbstractController
 
 //        $this->denyAccessUnlessGranted('ROLE_USER');
 
+        $posts = $postRepository->findBy(
+            [],
+            array('createdAt' => 'DESC'),
+            3,
+        );
+
         return $this->render('Front/secret_event/index.html.twig', [
-            'controller_name' => 'SecretEventController',
+            'posts' => $posts,
         ]);
     }
 }

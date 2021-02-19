@@ -1,11 +1,11 @@
 <article class="default-card">
     <div class="image-container">
-        <img src="/build/images/montage.jpg" alt="">
+        <img src="{{ asset(post|post_image_path) }}" alt="">
     </div>
 
     <div class="default-card-body">
         <h1>
-            Introduction SCSS
+            {{ post.title }}
         </h1>
 
         <div class="content">
