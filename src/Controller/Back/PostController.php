@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Service\PostImageManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -20,14 +21,17 @@ class PostController extends AbstractController
 {
 
     private EntityManagerInterface $em;
+    private PostImageManager $postImageManager;
 
     /**
      * PostController constructor.
      * @param EntityManagerInterface $em
+     * @param PostImageManager $postImageManager
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, PostImageManager $postImageManager)
     {
         $this->em = $em;
+        $this->postImageManager = $postImageManager;
     }
 
 
@@ -53,7 +57,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setCreatedAt(new DateTime());
 
-            $this->addImage($form['image']->getData(), $post);
+            $this->postImageManager->addImage($form['image']->getData(), $post);
 
             $this->em->persist($post);
             $this->em->flush();
@@ -76,7 +80,7 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->addImage($form['image']->getData(), $post);
+            $this->postImageManager->addImage($form['image']->getData(), $post);
             $this->em->flush();
 
             return $this->redirectToRoute('post_index');
@@ -102,11 +106,5 @@ class PostController extends AbstractController
         return $this->redirectToRoute('post_index');
     }
 
-    private function addImage(UploadedFile $file, Post $post) {
-        if(!empty($file)) {
-            $fileName = uniqid() . '-' . $file->getClientOriginalName();
-            $file->move('uploads/post', $fileName);
-            $post->setThumbnail($fileName);
-        }
-    }
+
 }
