@@ -9,4 +9,14 @@ body.admin {
             }
         }
     }
+
+    table {
+        .action-col {
+            text-align: right;
+
+            .btn {
+                padding: 0.25rem 1rem;
+            }
+        }
+    }
 }
