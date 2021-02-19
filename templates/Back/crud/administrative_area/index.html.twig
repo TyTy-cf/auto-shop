@@ -4,31 +4,63 @@
 
 {% block body %}
     <h1>AdministrativeArea index</h1>
-
+    {{ form_start(filters) }}
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Code</th>
-                <th>ParentCode</th>
-                <th>Type</th>
-                <th>Details</th>
-                <th>actions</th>
+                <th>
+                    {{ knp_pagination_sortable(administrative_areas, 'ID', 'aa.id') }}
+                    {{ form_widget(filters.id) }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(administrative_areas, 'Nom', 'aa.name') }}
+                    {{ form_widget(filters.name) }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(administrative_areas, 'Code', 'aa.code') }}
+                    {{ form_widget(filters.code) }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(administrative_areas, 'Code parent', 'aa.parentCode') }}
+                    {{ form_widget(filters.parentCode) }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(administrative_areas, 'Type', 'aa.type') }}
+                    {{ form_widget(filters.type) }}
+                </th>
+
+                <th class="action-col">
+                    <button type="submit">
+                        <i class="fas fa-filter"></i>
+                    </button>
+
+                    <a href="{{ path('administrative_area_index') }}">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>
         {% for administrative_area in administrative_areas %}
             <tr>
-                <td>{{ administrative_area.id }}</td>
-                <td>{{ administrative_area.name }}</td>
-                <td>{{ administrative_area.code }}</td>
-                <td>{{ administrative_area.parentCode }}</td>
-                <td>{{ administrative_area.type }}</td>
-                <td>{{ administrative_area.details ? administrative_area.details|join(', ') : '' }}</td>
                 <td>
-                    <a href="{{ path('administrative_area_show', {'id': administrative_area.id}) }}">show</a>
-                    <a href="{{ path('administrative_area_edit', {'id': administrative_area.id}) }}">edit</a>
+                    {{ administrative_area.id }}
+                </td>
+                <td>
+                    {{ administrative_area.name }}
+                </td>
+                <td>
+                    {{ administrative_area.code }}
+                </td>
+                <td>
+                    {{ administrative_area.parentCode }}
+                </td>
+                <td>
+                    {{ administrative_area.type }}
+                </td>
+                <td class="action-col">
+                    <a class="btn btn-primary" href="{{ path('administrative_area_show', {'id': administrative_area.id}) }}">show</a>
+                    <a class="btn btn-secondary" href="{{ path('administrative_area_edit', {'id': administrative_area.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -38,6 +70,11 @@
         {% endfor %}
         </tbody>
     </table>
+    {{ form_end(filters) }}
+
+    <div class="d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(administrative_areas) }}
+    </div>
 
     <a href="{{ path('administrative_area_new') }}">Ajouter</a>
 {% endblock %}

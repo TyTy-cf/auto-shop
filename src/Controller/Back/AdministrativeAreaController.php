@@ -4,7 +4,10 @@ namespace App\Controller\Back;
 
 use App\Entity\AdministrativeArea;
 use App\Form\AdministrativeAreaType;
+use App\Form\Filters\AdminAreaFilterType;
 use App\Repository\AdministrativeAreaRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +20,36 @@ class AdministrativeAreaController extends AbstractController
 {
     /**
      * @Route("/", name="administrative_area_index", methods={"GET"})
+     * @param AdministrativeAreaRepository $administrativeAreaRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @param FilterBuilderUpdaterInterface $builderUpdater
+     * @return Response
      */
-    public function index(AdministrativeAreaRepository $administrativeAreaRepository): Response
+    public function index(
+        AdministrativeAreaRepository $administrativeAreaRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        FilterBuilderUpdaterInterface $builderUpdater
+    ): Response
     {
+
+        $qb = $administrativeAreaRepository->getAll();
+
+        $filters = $this->createForm(AdminAreaFilterType::class, null, [
+            'method' => 'GET',
+        ]);
+
+        if($request->query->has($filters->getName())) {
+            $filters->submit($request->query->get($filters->getName()));
+            $builderUpdater->addFilterConditions($filters, $qb);
+        }
+
+        $pagination = $paginator->paginate($qb, $request->query->get('page', 1));
+
         return $this->render('Back/crud/administrative_area/index.html.twig', [
-            'administrative_areas' => $administrativeAreaRepository->findAll(),
+            'administrative_areas' => $pagination,
+            'filters' => $filters->createView(),
         ]);
     }
 
