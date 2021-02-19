@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'Back/base.html.twig' %}
 
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
     <h1>Edit User</h1>
 
-    {{ include('Back/crud/user/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('Back/crud/user/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     <a href="{{ path('user_index') }}">back to list</a>
 

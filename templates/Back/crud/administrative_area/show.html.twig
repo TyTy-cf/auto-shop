@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'Back/base.html.twig' %}
 
 {% block title %}AdministrativeArea{% endblock %}
 
@@ -34,7 +34,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('administrative_area_index') }}">back to list</a>
+    <a href="{{ path('administrative_area_index') }}">Retour à la liste</a>
 
     <a href="{{ path('administrative_area_edit', {'id': administrative_area.id}) }}">edit</a>
 
