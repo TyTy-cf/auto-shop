@@ -22,9 +22,16 @@
                 </th>
                 <th>
                     {{ knp_pagination_sortable(posts, 'Date de publication', 'p.createdAt') }}
+                    {{ form_widget(filters.createdAt) }}
                 </th>
                 <th class="action-col">
+                    <button type="submit">
+                        <i class="fas fa-filter"></i>
+                    </button>
 
+                    <a href="{{ path('post_index') }}">
+                        <i class="fas fa-times"></i>
+                    </a>
                 </th>
             </tr>
         </thead>
