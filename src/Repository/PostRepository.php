@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,6 +19,13 @@ class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
+
+    public function getAll(): QueryBuilder
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC');
+    }
+
 
     // /**
     //  * @return Post[] Returns an array of Post objects

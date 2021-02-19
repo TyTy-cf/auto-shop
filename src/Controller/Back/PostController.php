@@ -7,6 +7,7 @@ use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\PostImageManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,14 +35,25 @@ class PostController extends AbstractController
         $this->postImageManager = $postImageManager;
     }
 
-
     /**
      * @Route("/", name="post_index", methods={"GET"})
+     * @param PostRepository $postRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
      */
-    public function index(PostRepository $postRepository): Response
+    public function index(
+        PostRepository $postRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response
     {
+        $qb = $postRepository->getAll();
+
+        $posts = $paginator->paginate($qb, $request->query->get('page', 1), 2);
+
         return $this->render('Back/crud/post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $posts,
         ]);
     }
 
@@ -83,7 +95,7 @@ class PostController extends AbstractController
             $this->postImageManager->addImage($form['image']->getData(), $post);
             $this->em->flush();
 
-            return $this->redirectToRoute('post_index');
+            //return $this->redirectToRoute('post_index');
         }
 
         return $this->render('Back/crud/post/edit.html.twig', [

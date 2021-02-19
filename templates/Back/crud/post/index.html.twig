@@ -36,8 +36,8 @@
         </tbody>
     </table>
 
-    <div class="text-end">
-        <a class="btn btn-primary" href="{{ path('post_new') }}">Ajouter</a>
+    <div class="d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(posts) }}
     </div>
 
 {% endblock %}

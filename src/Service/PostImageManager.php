@@ -13,8 +13,8 @@ class PostImageManager
     //Ajoute une image à un post
     public function addImage(?UploadedFile $file, Post $post)
     {
-        (new Filesystem())->remove('uploads/post/' . $post->getThumbnail());
         if (null !== $file) {
+            (new Filesystem())->remove('uploads/post/' . $post->getThumbnail());
             $fileName = uniqid() . '-' . $file->getClientOriginalName();
             $file->move('uploads/post', $fileName);
             $post->setThumbnail($fileName);

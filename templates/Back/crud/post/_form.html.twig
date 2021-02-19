@@ -1,5 +1,25 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+
+    <div class="row">
+        {% if post.thumbnail is not null %}
+            <div class="col-md-6 text-center">
+                <img style="max-width: 200px" src="{{ asset(post|post_image_path) }}" alt="{{ post.thumbnail }}">
+                <div>
+                    {{ post.thumbnail }}
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-md-6">
+            Si vous souhaitez remplacer l'image :
+            {{ form_row(form.image) }}
+        </div>
+    </div>
+
+
+
+
     <div class="text-end">
         <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
     </div>
