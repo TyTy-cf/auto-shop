@@ -11,10 +11,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>CreatedAt</th>
-                <th class="action-col">actions</th>
+                <th>
+                    {{ knp_pagination_sortable(posts, 'ID', 'p.id') }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(posts, 'Titre', 'p.title') }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(posts, 'Date de publication', 'p.createdAt') }}
+                </th>
+                <th class="action-col">
+
+                </th>
             </tr>
         </thead>
         <tbody>

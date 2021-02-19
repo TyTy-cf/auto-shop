@@ -50,7 +50,7 @@ class PostController extends AbstractController
     {
         $qb = $postRepository->getAll();
 
-        $posts = $paginator->paginate($qb, $request->query->get('page', 1), 2);
+        $posts = $paginator->paginate($qb, $request->query->get('page', 1));
 
         return $this->render('Back/crud/post/index.html.twig', [
             'posts' => $posts,
