@@ -3,11 +3,13 @@
 namespace App\Controller\Back;
 
 use App\Entity\Post;
+use App\Form\Filters\PostFilterType;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\PostImageManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,20 +42,33 @@ class PostController extends AbstractController
      * @param PostRepository $postRepository
      * @param PaginatorInterface $paginator
      * @param Request $request
+     * @param FilterBuilderUpdaterInterface $builderUpdater
      * @return Response
      */
     public function index(
         PostRepository $postRepository,
         PaginatorInterface $paginator,
-        Request $request
+        Request $request,
+        FilterBuilderUpdaterInterface $builderUpdater
     ): Response
     {
         $qb = $postRepository->getAll();
 
+        $filters = $this->createForm(PostFilterType::class, null, [
+            'method' => 'GET',
+        ]);
+
+        if($request->query->has($filters->getName())) {
+            $filters->submit($request->query->get($filters->getName()));
+            $builderUpdater->addFilterConditions($filters, $qb);
+        }
+
         $posts = $paginator->paginate($qb, $request->query->get('page', 1));
+
 
         return $this->render('Back/crud/post/index.html.twig', [
             'posts' => $posts,
+            'filters' => $filters->createView(),
         ]);
     }
 
