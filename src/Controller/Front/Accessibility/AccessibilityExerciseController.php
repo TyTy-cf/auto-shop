@@ -8,14 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AccessibilityDemoController extends AbstractController
+class AccessibilityExerciseController extends AbstractController
 {
     /**
-     * @Route("/accessibility/demo", name="accessibility_demo")
+     * @Route("/accessibility/exercice", name="accessibility_exercise")
      * @return Response
      */
     public function __invoke(): Response
     {
-        return $this->render('Front/Accessibility/demo.html.twig');
+        return $this->render('Front/Accessibility/exercise.html.twig');
     }
 }
