@@ -12,7 +12,7 @@
         {{ encore_entry_link_tags('style') }}
     {% endblock %}
 </head>
-<body>
+<body class="body {% block body_class %}{% endblock %}">
 <header class="main-header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -47,7 +47,11 @@
     </nav>
 </header>
 
-{% block body %}{% endblock %}
+<main>
+    {% block body %}
+    {% endblock %}
+</main>
+
 
 {% block javascripts %}
     {{ encore_entry_script_tags('script') }}

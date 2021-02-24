@@ -1,0 +1,15 @@
+body.post-show {
+    .image-container {
+        img {
+            width: 100%;
+            height: 375px;
+            object-fit: cover;
+        }
+    }
+
+    form {
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    }
+}

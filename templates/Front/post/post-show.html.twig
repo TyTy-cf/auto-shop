@@ -2,22 +2,68 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
+{% block body_class %}post-show{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h1 class="section-title">
-                    {{ post.title }}
-                </h1>
+    <article>
+        <div class="image-container">
+            <img src="{{ asset(post|post_image_path) }}" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="pop-title mt-4">
+                        {{ post.title }}
+                    </h1>
 
-                <small>
-                    Publié le {{ post.createdAt|date('d/m/Y H:i') }}
-                </small>
-            </div>
+                    <small>
+                        Publié le {{ post.createdAt|date('d/m/Y H:i') }}
+                    </small>
 
-            <div class="col-12">
-                {{ post.content|raw }}
+                    <button class="no-style-btn"
+                            title="Imprimer"
+                            aria-label="Imprimer l'article {{ post.title }}"
+                    >
+                        <i class="fas fa-print" aria-hidden="true"></i>
+                    </button>
+
+                    {% if post.excerpt is not empty %}
+                        <div>
+                            <strong>
+                                {{ post.excerpt }}
+                            </strong>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-12 mt-4">
+                    {{ post.content|raw }}
+                </div>
             </div>
         </div>
-    </div>
+    </article>
+
+    <section >
+
+        <svg aria-label="Nom de famille" id="name_label">
+
+        </svg>
+
+        <input type="text" aria-labelledby="name_label">
+
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-12">
+                    {{ form_start(form) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.message) }}
+                    {{ form_row(form.conditions_acceptation) }}
+                    <button type="button" aria-label="Envoyer le formulaire de contact">
+                        Envoyer
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

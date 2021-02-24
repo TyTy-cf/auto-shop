@@ -19,7 +19,9 @@ class PostType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre'
             ])
-            ->add('excerpt', TextareaType::class)
+            ->add('excerpt', TextareaType::class, [
+                'required' => false,
+            ])
             ->add('content', CKEditorType::class, [
                 'config' => ['toolbar' => 'my_toolbar_1'],
                 'required' => false,
@@ -28,7 +30,9 @@ class PostType extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('thumbnailAlt', TextType::class)
+            ->add('thumbnailAlt', TextType::class, [
+                'required' => false,
+            ])
         ;
     }
 
