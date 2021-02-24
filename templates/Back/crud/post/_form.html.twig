@@ -1,5 +1,6 @@
 {{ form_start(form) }}
     {{ form_row(form.title) }}
+    {{ form_row(form.excerpt) }}
     {{ form_row(form.content) }}
 
     <div class="row">
@@ -14,7 +15,10 @@
         <div class="col-md-6">
             Si vous souhaitez remplacer l'image :
             {{ form_row(form.image) }}
+
+            {{ form_row(form.thumbnailAlt) }}
         </div>
+
     </div>
 
 

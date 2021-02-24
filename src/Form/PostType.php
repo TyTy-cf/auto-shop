@@ -6,6 +6,7 @@ use App\Entity\Post;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +16,10 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
+            ->add('title', TextType::class, [
+                'label' => 'Titre'
+            ])
+            ->add('excerpt', TextareaType::class)
             ->add('content', CKEditorType::class, [
                 'config' => ['toolbar' => 'my_toolbar_1'],
                 'required' => false,
@@ -24,6 +28,7 @@ class PostType extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
+            ->add('thumbnailAlt', TextType::class)
         ;
     }
 

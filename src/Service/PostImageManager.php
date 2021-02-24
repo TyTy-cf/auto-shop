@@ -14,7 +14,7 @@ class PostImageManager
     public function addImage(?UploadedFile $file, Post $post)
     {
         if (null !== $file) {
-            (new Filesystem())->remove('uploads/post/' . $post->getThumbnail());
+            $this->deleteIfReplace($post);
             $fileName = uniqid() . '-' . $file->getClientOriginalName();
             $file->move('uploads/post', $fileName);
             $post->setThumbnail($fileName);
@@ -38,5 +38,6 @@ class PostImageManager
         // ou
 
         (new Filesystem())->remove('uploads/post/' . $post->getThumbnail());
+        $post->setThumbnailAlt(null);
     }
 }

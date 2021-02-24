@@ -37,6 +37,16 @@ class Post
      */
     private $thumbnail;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $thumbnailAlt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $excerpt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class Post
     public function setThumbnail(?string $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getThumbnailAlt(): ?string
+    {
+        return $this->thumbnailAlt;
+    }
+
+    public function setThumbnailAlt(?string $thumbnailAlt): self
+    {
+        $this->thumbnailAlt = $thumbnailAlt;
+
+        return $this;
+    }
+
+    public function getExcerpt(): ?string
+    {
+        return $this->excerpt;
+    }
+
+    public function setExcerpt(?string $excerpt): self
+    {
+        $this->excerpt = $excerpt;
 
         return $this;
     }

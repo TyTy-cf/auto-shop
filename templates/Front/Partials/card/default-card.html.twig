@@ -9,16 +9,12 @@
         </h1>
 
         <div class="content">
-            {% if index is defined and index == 2 %}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem deleniti earum incidunt iusto quibusdam quos reprehenderit sit totam velit voluptatem!
-            {% else %}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum illum maiores, minima tempore vel voluptas?
-            {% endif %}
+            {{ post.excerpt }}
         </div>
     </div>
 
     <div class="read-more">
-        <a href="#">
+        <a href="{{ path('post_show', {'id': post.id}) }}">
             Voir plus
         </a>
     </div>
