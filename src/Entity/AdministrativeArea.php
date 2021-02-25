@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\AdministrativeAreaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AdministrativeAreaRepository::class)
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read:admin_area"}}
+ * )
  */
 class AdministrativeArea
 {
@@ -14,11 +19,13 @@ class AdministrativeArea
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:admin_area"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:admin_area"})
      */
     private $name;
 
@@ -34,6 +41,7 @@ class AdministrativeArea
 
     /**
      * @ORM\Column(type="string", length=75)
+     * @Groups({"read:admin_area"})
      */
     private $type;
 
