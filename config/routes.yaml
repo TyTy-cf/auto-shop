@@ -1,3 +1,10 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+
+async:
+    resource: '../src/Controller/Async'
+    type:     annotation
+    prefix:   /async
+    trailing_slash_on_root: false

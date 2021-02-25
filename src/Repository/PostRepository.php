@@ -26,6 +26,26 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('p.createdAt', 'DESC');
     }
 
+    /**
+     * @param int|null $limit
+     * @return QueryBuilder
+     */
+    public function getLasts(?int $limit = null): QueryBuilder
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults($limit);
+    }
+
+    /**
+     * @param int $limit
+     * @return Post[]
+     */
+    public function findLasts(int $limit = 10) {
+        return $this->getLasts($limit)->getQuery()->getResult();
+    }
+
+
 
     // /**
     //  * @return Post[] Returns an array of Post objects

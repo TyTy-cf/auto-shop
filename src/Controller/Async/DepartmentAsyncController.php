@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DepartmentAsyncController extends AbstractController
 {
     /**
-     * @Route("/async/department/search", name="async_department_search")
+     * @Route("/department/search", name="async_department_search")
      * @param Request $request
      * @param AdministrativeAreaRepository $areaRepository
      * @return Response
@@ -22,10 +22,10 @@ class DepartmentAsyncController extends AbstractController
     {
         $response = new Response();
 
-        if($this->getUser() === null) {
-            $response->setStatusCode(403);
-            return $response;
-        }
+//        if($this->getUser() === null) {
+//            $response->setStatusCode(403);
+//            return $response;
+//        }
 
         $search = $request->get('search');
 
