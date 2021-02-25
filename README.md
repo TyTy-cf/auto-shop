@@ -43,3 +43,9 @@ Replace
     }
 ```
 
+### Plus d'infos sur symfony
+
+Pour installer le certificat permettant l'utilisation de l'https :
+``` bash
+symfony server:ca:install
+```

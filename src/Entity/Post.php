@@ -10,7 +10,15 @@ use Symfony\Component\Serializer\Annotation\Ignore;
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ApiResource(
- *     collectionOperations={"get"},
+ *     attributes={
+            "order"={"createdAt":"DESC"}
+ *     },
+ *     collectionOperations={
+ *      "get",
+ *      "post"={
+            "security"="is_granted('ROLE_ADMIN')"
+ *     }
+ * },
  *     itemOperations={"get"}
  * )
  */

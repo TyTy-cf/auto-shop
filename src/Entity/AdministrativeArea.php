@@ -10,7 +10,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=AdministrativeAreaRepository::class)
  * @ApiResource(
- *     normalizationContext={"groups"={"read:admin_area"}}
+ *     normalizationContext={"groups"={"read:admin_area"}},
+ *     paginationItemsPerPage=2,
+ *     itemOperations={
+ *         "get"={
+ *              "normalization_context"={"groups"={"read:admin_area", "read:full:admin_area"}}
+ *         }
+ *     }
  * )
  */
 class AdministrativeArea
@@ -31,11 +37,13 @@ class AdministrativeArea
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Groups({"read:full:admin_area"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Groups({"read:full:admin_area"})
      */
     private $parentCode;
 
@@ -47,6 +55,7 @@ class AdministrativeArea
 
     /**
      * @ORM\Column(type="array", nullable=true)
+     *@Groups({"read:full:admin_area"})
      */
     private $details = [];
 
