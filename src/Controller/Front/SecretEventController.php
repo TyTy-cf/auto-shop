@@ -20,11 +20,7 @@ class SecretEventController extends AbstractController
 
 //        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $posts = $postRepository->findBy(
-            [],
-            array('createdAt' => 'DESC'),
-            3,
-        );
+        $posts = $postRepository->findLasts(3);
 
         return $this->render('Front/secret_event/index.html.twig', [
             'posts' => $posts,

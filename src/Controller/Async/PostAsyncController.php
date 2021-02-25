@@ -11,6 +11,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class PostAsyncController
 {
@@ -19,13 +20,16 @@ class PostAsyncController
      * @param Request $request
      * @param PostRepository $postRepository
      * @param PostImageManager $imageManager
+     * @param PaginatorInterface $paginator
+     * @param SerializerInterface $serializer
      * @return Response
      */
     public function collectionAction(
         Request $request,
         PostRepository $postRepository,
         PostImageManager $imageManager,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
+        SerializerInterface $serializer
     ): Response
     {
         $response = new Response();
@@ -36,6 +40,10 @@ class PostAsyncController
         $data = [];
 
         $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+
+//        $data = $serializer->serialize($posts, 'json');
+//        $response->setContent($data);
+
 
         foreach ($posts as $post) {
             /** @var Post $post */

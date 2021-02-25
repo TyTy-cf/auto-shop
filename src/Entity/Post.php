@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -39,6 +40,7 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Ignore()
      */
     private $thumbnailAlt;
 
