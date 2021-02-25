@@ -25,6 +25,28 @@ class AdministrativeAreaRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('aa');
     }
 
+    /**
+     * @param string $search
+     * @return QueryBuilder
+     */
+    public function getByName(string $search): QueryBuilder
+    {
+        return $this->createQueryBuilder('aa')
+            ->where('aa.name like :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('aa.name', 'ASC')
+            ->setMaxResults(10);
+    }
+
+    /**
+     * @param string $search
+     * @return AdministrativeArea[]
+     */
+    public function findByName(string $search)
+    {
+        return $this->getByName($search)->getQuery()->getResult();
+    }
+
     // /**
     //  * @return AdministrativeArea[] Returns an array of AdministrativeArea objects
     //  */
