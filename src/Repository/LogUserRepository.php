@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\LogUser;
+use App\Enum\LogActionEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,20 @@ class LogUserRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, LogUser::class);
+    }
+
+    public function findRemoveActionLog(LogUser $log)
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.targetEntity = :targetEntity')
+            ->andWhere('l.targetEntityType = :targetEntityType')
+            ->andWhere('l.action = :action')
+            ->setParameter('targetEntity', $log->getTargetEntity())
+            ->setParameter('targetEntityType', $log->getTargetEntityType())
+            ->setParameter('action', LogActionEnum::REMOVE)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 
     // /**

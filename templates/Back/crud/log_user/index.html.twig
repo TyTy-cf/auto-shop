@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>User</th>
                 <th>TargetEntity</th>
                 <th>TargetEntityType</th>
                 <th>LogAt</th>
@@ -20,14 +21,26 @@
         {% for log_user in log_users %}
             <tr>
                 <td>{{ log_user.id }}</td>
-                <td>{{ log_user.targetEntity }}</td>
-                <td>{{ log_user.targetEntityType }}</td>
+                <td>{{ log_user.user }}</td>
+                <td>
+{#                    {{ log_user.targetEntity }}#}
+                    {% set data = log_user|find_entity() %}
+
+                    {% if data is iterable%}
+                        {% if data.targetEntityName is not null %}
+                            {{ data.targetEntityName }}
+                        {% endif %}
+                    {% else %}
+                        <strong>
+                            {{ data }}
+                        </strong>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ log_user.targetEntityType }}
+                </td>
                 <td>{{ log_user.logAt ? log_user.logAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ log_user.action }}</td>
-                <td>
-                    <a href="{{ path('log_user_show', {'id': log_user.id}) }}">show</a>
-                    <a href="{{ path('log_user_edit', {'id': log_user.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -36,6 +49,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('log_user_new') }}">Create new</a>
 {% endblock %}
