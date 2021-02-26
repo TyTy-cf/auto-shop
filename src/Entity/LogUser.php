@@ -43,6 +43,11 @@ class LogUser
      */
     private $action;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $details = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class LogUser
     public function setAction(string $action): self
     {
         $this->action = $action;
+
+        return $this;
+    }
+
+    public function getDetails(): ?array
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?array $details): self
+    {
+        $this->details = $details;
 
         return $this;
     }
