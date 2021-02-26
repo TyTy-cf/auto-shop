@@ -1,0 +1,11 @@
+{% extends 'Back/base.html.twig' %}
+
+{% block title %}New LogUser{% endblock %}
+
+{% block body %}
+    <h1>Create new LogUser</h1>
+
+    {{ include('Back/crud/log_user/_form.html.twig') }}
+
+    <a href="{{ path('log_user_index') }}">back to list</a>
+{% endblock %}
