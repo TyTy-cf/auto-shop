@@ -33,8 +33,3 @@ services:
     App\EventListener\UserSubscriber:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
-    App\EventListener\LogSubscriber:
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }
-            - { name: doctrine.event_listener, event: postUpdate }
-            - { name: doctrine.event_listener, event: postRemove }
